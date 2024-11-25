@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG</title>
+    <style>
+        /* Add some basic styling to the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* light gray background */
+        }
+
+        /* Center the content and add some padding */
+        center {
+            padding: 20px;
+            background-color: #fff; /* white background */
+            border: 1px solid #ddd; /* light gray border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+            width: 80%; /* make it 80% wide */
+            margin: 40px auto; /* add some margin and center it */
+        }
+
+        /* Style the form elements */
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc; /* light gray border */
+            border-radius: 5px; /* rounded corners */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50; /* green background */
+            color: #fff; /* white text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* rounded corners */
+            cursor: pointer; /* change cursor to a hand */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3e8e41; /* darker green on hover */
+        }
+
+        /* Add some space between the form elements */
+        br {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <center><br>
+        <h1>WELCOME BACK TO YOUR BLOG</h1>
+    <form action="/home" method="post"><br>
+        <label>TITLE:</label>
+        <input type="text" name="title" placeholder="TITLE..."><BR></BR>
+        <label>STORY:</label><br>
+        <textarea name="story" cols="30" rows="20"> </textarea>
+        
+        <input type="submit" value="ADD STORY">
+    </form></center>
+   
+        
+</body>
+</html>

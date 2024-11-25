@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STORIES</title>
+    <style>
+        /* Add some basic styling to the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7; /* light gray background */
+            text-align: center; /* center all content */
+        }
+
+        /* Style the headings */
+        h1 {
+            color: #333; /* dark gray text */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Style the labels and strong text */
+        label {
+            font-size: 18px;
+            color: #666; /* medium gray text */
+            display: block; /* make labels block-level elements */
+            margin: 10px auto; /* add some margin and center */
+        }
+
+        strong {
+            color: #337ab7; /* blue text */
+        }
+
+        /* Style the find button */
+        #find-button {
+            background-color: #4CAF50; /* green background */
+            color: #fff; /* white text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* rounded corners */
+            cursor: pointer; /* change cursor to a hand */
+        }
+
+        #find-button:hover {
+            background-color: #3e8e41; /* darker green on hover */
+        }
+
+        /* Style the refresh button */
+        #refresh-button {
+            background-color: #337ab7; /* blue background */
+            color: #fff; /* white text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* rounded corners */
+            cursor: pointer; /* change cursor to a hand */
+        }
+
+        #refresh-button:hover {
+            background-color: #23527c; /* darker blue on hover */
+        }
+
+        /* Style the new story button */
+        #new-story-button {
+            background-color: #337ab7; /* blue background */
+            color: #fff; /* white text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* rounded corners */
+            cursor: pointer; /* change cursor to a hand */
+        }
+
+        #new-story-button:hover {
+            background-color: #23527c; /* darker blue on hover */
+        }
+
+        /* Style the story list */
+        #story-list {
+            display: inline-block; /* make the story list an inline-block element */
+            text-align: left; /* left-align the story list content */
+        }
+
+        #story-list > div {
+            margin: 20px; /* add some margin between stories */
+        }
+
+        #story-list label {
+            margin-bottom: 10px; /* add some margin between label and story */
+        }
+
+        #story-list pre {
+            white-space: pre-wrap; /* allow pre elements to wrap text */
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>ALL STORIES</h1>
+    <input type="search" id="search-input" placeholder="Search stories...">
+    <button id="find-button" onclick="searchStories()">Find</button>
+    <button id="refresh-button" onclick="refreshList()">Refresh</button>
+    <button id="new-story-button"><a href="/home">NEW STORY...</a></button>
+    <br><br>
+    <div id="story-list">
+        {% for blog in blogs %}
+        {% if  blog[0] >= blogs[1][0] %}
+        <div>
+            <label>TITLE   &nbsp;  :   <strong>{{ blog[1] }}</strong></label>
+            <pre>STORY &nbsp;: {{blog[2]}}</pre>
+            <BR></BR>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <script>
+        function searchStories() {
+            var searchInput = document.getElementById("search-input").value;
+            var storyList = document.getElementById("story-list");
+            var stories = storyList.children;
+            
+            for (var i = 0; i < stories.length; i++) {
+                var story = stories[i];
+                var title = story.querySelector("label strong").textContent;
+                var text = story.querySelector("pre").textContent;
+                if (title.toLowerCase().indexOf(searchInput.toLowerCase()) === -1 && text.toLowerCase().indexOf(searchInput.toLowerCase()) === -1) {
+                    story.style.display = "none";
+                } else {
+                    story.style.display = "block";
+                }
+            }
+        }
+
+        function refreshList() {
+            var storyList = document.getElementById("story-list");
+            var stories = storyList.children;
+            
+            for (var i = 0; i < stories.length; i++) {
+                stories[i].style.display = "block";
+            }
+            document.getElementById("search-input").value = "";
+        }
+    </script>
+        
+</body>
+</html>

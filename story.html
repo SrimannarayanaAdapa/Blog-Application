@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STORY</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7; /* light gray background */
+            text-align: center; /* center all content */
+        }
+
+        h1 {
+            color: #333; /* dark gray text */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #666; /* medium gray text */
+            display: block; /* make labels block-level elements */
+            margin: 10px auto; /* add some margin and center */
+        }
+
+        pre {
+            white-space: pre-wrap; /* allow pre elements to wrap text */
+        }
+
+        button {
+            background-color: #337ab7; /* blue background */
+            color: #fff; /* white text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* rounded corners */
+            cursor: pointer; /* change cursor to a hand */
+        }
+
+        button:hover {
+            background-color: #23527c; /* darker blue on hover */
+        }
+
+        .edit-button {
+            background-color: #4CAF50; /* green background */
+            color: #fff; /* white text */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px; /* rounded corners */
+            cursor: pointer; /* change cursor to a hand */
+        }
+
+        .edit-button:hover {
+            background-color: #3e8e41; /* darker green on hover */
+        }
+
+        .button-group {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        #edit-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        #edit-modal form {
+            background-color: #f7f7f7;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>MY STORY</h1>
+    <div class="button-group">
+        <button><a href="/home">NEW STORY...</a></button>
+        <button><a href="/stories">CHECK STORY...</a></button>
+    </div>
+    {% for blog in blogs %}
+    {% if  blog[0] >= blogs[-1][0] %}
+    <label>TITLE :&nbsp; {{ blog[1] }}</label>
+    <pre>STORY :&nbsp;<br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;{{blog[2]}}</pre>
+    <button class="edit-button" onclick="editStory({{ blog[0] }})">Edit</button>
+    <BR></BR>
+    {% endif %}
+    {% endfor %}
+      
+    <div id="edit-modal">
+        <form>
+            <input type="hidden" name="blog_id" value="">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title"><br><br>
+            <label for="story">Story:</label>
+            <textarea id="story" name="story"></textarea><br><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+        function editStory(blogId) {
+            var modal = document.getElementById("edit-modal");
+            var form = modal.querySelector("form");
+            form.querySelector("input[name='blog_id']").value = blogId;
+
+            var title = document.querySelector("label[for='title']").textContent;
+            var story = document.querySelector("pre").textContent;
+
+            form.querySelector("input[name='title']").value = title;
+            form.querySelector("textarea[name='story']").value = story;
+
+            modal.style.display = "block";
+        }
+    </script>
+        
+</body>
+</html>
